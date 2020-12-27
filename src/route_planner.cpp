@@ -8,7 +8,6 @@
 
 
 void RoutePlanner::InitNode(RouteModel::Node &node, RouteModel::Node *prev_node) {
-    node.FindNeighbors();
     if (prev_node) {
         node.parent = prev_node;
         node.g_value = prev_node->g_value + prev_node->distance(node);
@@ -34,6 +33,7 @@ float RoutePlanner::CalculateHValue(RouteModel::Node const *node) {
 
 
 void RoutePlanner::AddNeighbors(RouteModel::Node *current_node) {
+    current_node->FindNeighbors();
     for (RouteModel::Node* neighbor : current_node->neighbors) {
         if (neighbor->visited) continue;
         InitNode(*neighbor, current_node);
