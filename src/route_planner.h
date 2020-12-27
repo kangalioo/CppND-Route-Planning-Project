@@ -21,7 +21,12 @@ class RoutePlanner {
     RouteModel::Node *NextNode();
 
   private:
-    float start_x, start_y, end_x, end_y;
+    void InitNode(RouteModel::Node &node, RouteModel::Node *prev_node);
+
+    float start_x, start_y, end_x, end_y; // REMEMBER
+    std::vector<RouteModel::Node*> open_list;
+    RouteModel::Node *start_node;
+    RouteModel::Node *end_node;
 
     float distance = 0.0f;
     RouteModel &m_Model;
